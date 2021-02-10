@@ -81,8 +81,6 @@ app.use(logger('dev'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', basicRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/user', userRouter);
