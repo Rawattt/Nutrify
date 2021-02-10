@@ -1,0 +1,23 @@
+div.custom-container  
+  // Button trigger modal
+  button.btn.btn-primary(type='button', data-toggle='modal', data-target='#add-meal-form-modal')
+    | Create Meal
+  // Modal
+  #add-meal-form-modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='add-meal-form-modalTitle', aria-hidden='true')
+    .modal-dialog.modal-dialog-centered(role='document')
+      .modal-content
+        .modal-header
+          h5#add-meal-form-modalTitle.modal-title Create Meal
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') &times;
+        .modal-body
+          form.add-meal-form(method='post', action='/meal/add')
+            .form-group
+              input.form-control(type='text', required='' name='food_name' placeholder='Food Name')
+            .form-group
+              input.form-control(type='text', required='' name='description' placeholder='Description')
+            .form-group
+            .form-group
+              input.form-control(type='number', required='', min='1' name='calories' placeholder='Calories')
+
+            button.btn.btn-primary(type='submit') Submit

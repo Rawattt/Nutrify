@@ -1,0 +1,13 @@
+extends layout.pug
+mixin error(message)
+      .alert.alert-danger.alert-dismissible.fade.show(role='alert')
+            strong= message
+            button.close(type='button', data-dismiss='alert', aria-label='Close')
+                  span(aria-hidden='true') &times;
+block navbar
+      include includes/noAuth/navbar.pug
+block body
+      if message
+            +error(message)
+      include includes/noAuth/content.pug
+      include includes/noAuth/signupForm.pug

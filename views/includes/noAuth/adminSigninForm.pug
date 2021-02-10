@@ -1,0 +1,11 @@
+form(method='POST', action='/admin/signin')
+  .form-group
+    label(for='exampleInputEmail1') Email address
+    input#exampleInputEmail1.form-control(type='email', aria-describedby='emailHelp', placeholder='Enter email', name='email', required='')
+  .form-group
+    label(for='exampleInputPassword1') Password
+    input#exampleInputPassword1.form-control(type='password', placeholder='Password', required='', minlength='6' name='password')
+  button.btn.btn-primary(type='submit') Signin
+
+script. 
+  let messages = !{JSON.stringify({message})}

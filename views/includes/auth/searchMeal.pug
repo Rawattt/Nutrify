@@ -1,0 +1,32 @@
+div.custom-container  
+  // Button trigger modal
+  button.btn.btn-primary(type='button', data-toggle='modal', data-target='#search-meal-form-modal')
+    | Search Meals
+  // Modal
+  #search-meal-form-modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='search-meal-form-modalTitle', aria-hidden='true')
+    .modal-dialog.modal-dialog-centered(role='document')
+      .modal-content
+        .modal-header
+          h5#search-meal-form-modalTitle.modal-title Create Meal
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') &times;
+        .modal-body
+          form.add-meal-form(method='get', action='/user/dashboard/search')
+            .form-group
+              <label for="start_date">Start Date</label>
+              input.form-control(type='date', name='start_date' )
+            .form-group
+              <label for="end_date">End Date</label>
+              input.form-control(type='date', name='end_date')
+            .form-group
+              <label for="sortBy">Sort By</label>
+              select.form-control(name='sortBy')
+                option(value="datetime" selected) Time
+                option(value="calories") Calories
+            .form-group
+              <label for="order">Order</label>
+              select.form-control(name='order')
+                option(value="1" selected) Ascending
+                option(value="-1") Descending
+
+            button.btn.btn-primary(type='submit') Submit

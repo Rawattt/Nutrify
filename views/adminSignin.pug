@@ -1,0 +1,11 @@
+extends layout.pug
+mixin error(message)
+      .alert.alert-danger.alert-dismissible.fade.show(role='alert')
+            strong= message
+            button.close(type='button', data-dismiss='alert', aria-label='Close')
+                  span(aria-hidden='true') &times;
+
+block body
+      if message
+            +error(message)
+      include includes/noAuth/adminSigninForm.pug

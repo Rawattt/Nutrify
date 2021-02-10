@@ -1,0 +1,19 @@
+extends layout.pug
+
+block navbar
+      include includes/auth/navbar.pug
+block body
+
+      div.d-flex.justify-content-around.flex-wrap.p-3
+            include includes/auth/additional
+            include includes/auth/searchMeal
+      div.my-2.p-1
+            if user_data.today 
+                  include includes/auth/progressBar
+
+      div.d-flex.justify-content-around.flex-wrap.meal-container.p-3
+      //- Meal data
+      script.
+            let data = !{JSON.stringify({...user_data})}
+      script
+            include js/dashboard.js

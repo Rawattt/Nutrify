@@ -1,0 +1,17 @@
+form(method='POST', action='/api/v1/auth/signup')
+  .form-group
+    input.form-control(type='text', aria-describedby='emailHelp', placeholder='Name', name='name', required='')
+  .form-group
+    input.form-control(type='text', aria-describedby='emailHelp', placeholder='Username', name='username', required='')
+  .form-group 
+    input.form-control(type='email', aria-describedby='emailHelp', placeholder='Email', name='email', required='')
+  .form-group
+    input.form-control(type='password', placeholder='Password', required='', minlength='6' name='password')
+  .form-group
+    input.form-control(type='number', placeholder='Calories per day', required='', min='1' name='calories_per_day')
+  button.btn.btn-primary(type='submit') Signup
+  span.mx-3 Already have an account. Signin
+      a(href="/signin")  here
+
+script. 
+  let messages = !{JSON.stringify({message})}

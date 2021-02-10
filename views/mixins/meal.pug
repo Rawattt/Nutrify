@@ -1,0 +1,9 @@
+mixin meal(id, name, desc, calories)
+      .card(style='width: 18rem;')
+            .card-body
+                  h5.card-title #name
+                  h6.card-subtitle.mb-2.text-muted #desc
+                  p.card-text #calories
+                  button.btn.btn-dark(onclick='edit(id)') Card link
+                  button.btn.btn-dark(onclick='delete(id)') Another link
+

@@ -1,0 +1,13 @@
+form(method='POST', action='/api/v1/auth/signin')
+  .form-group
+    label(for='exampleInputEmail1') Email address
+    input#exampleInputEmail1.form-control(type='email', aria-describedby='emailHelp', placeholder='Enter email', name='email', required='')
+  .form-group
+    label(for='exampleInputPassword1') Password
+    input#exampleInputPassword1.form-control(type='password', placeholder='Password', required='', minlength='6' name='password')
+  button.btn.btn-primary(type='submit') Signin
+  span.mx-3 Do not have an account? Signup
+      a(href="/signup")  here
+
+script. 
+  let messages = !{JSON.stringify({message})}

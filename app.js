@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const dotenv = require('dotenv');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const sanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const xss = require('xss-clean');
@@ -27,18 +28,20 @@ const { EXPIRES_TIME, NAME, SECRET, DEV } = process.env;
 const max_age = EXPIRES_TIME * 60 * 60 * 24 * 1000;
 
 app.use(
-  session({
-    name: NAME,
-    secret: SECRET,
-    saveUninitialized: false,
-    resave: false,
-    cookie: {
-      maxAge: max_age,
-      sameSite: true,
-      secure: !DEV
-    }
-    // store: new RedisStore({ client: redisClient }),
-  })
+    session({
+        name: NAME,
+        secret: SECRET,
+        saveUninitialized: true,
+        resave: true,
+        store: new MongoStore({
+            url: `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster.glwj2.mongodb.net/nutrify?retryWrites=true&w=majority`
+        }),
+        cookie: {
+            maxAge: max_age,
+            sameSite: true,
+            secure: !DEV
+        }
+    })
 );
 
 const db = require('./db/db');
@@ -50,24 +53,24 @@ app.use(express.json());
 // Cookie Parser
 app.use(cookieParser());
 
-// //  Sanitize data
-// app.use(sanitize());
+//  Sanitize data
+app.use(sanitize());
 
 // //Set security headers
 // app.use(helmet());
 
-// // Prevent XSS attacks
-// app.use(xss());
+// Prevent XSS attacks
+app.use(xss());
 
-// // Rate limiting
-// const limiter = rateLimit({
-//   windowMs: 10 * 60 * 1000,
-//   max: 100
-// });
-// app.use(limiter);
+// Rate limiting
+const limiter = rateLimit({
+    windowMs: 10 * 60 * 1000,
+    max: 100
+});
+app.use(limiter);
 
-// // Prevent http params pollution
-// app.use(hpp());
+// Prevent http params pollution
+app.use(hpp());
 
 // // Enable CORS
 // app.use(cors());
@@ -91,9 +94,9 @@ app.get('/not-found', (req, res) => res.render('error'));
 app.get('/*', (req, res) => res.redirect('/not-found'));
 
 app.listen(process.env.PORT, (err) => {
-  if (err) {
-    console.log(`ERROR: ${err}`);
-    process.exit();
-  }
-  console.log(`Server is running on port ${process.env.PORT}`);
+    if (err) {
+        console.log(`ERROR: ${err}`);
+        process.exit();
+    }
+    console.log(`Server is running on port ${process.env.PORT}`);
 });
