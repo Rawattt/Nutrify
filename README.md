@@ -1,5 +1,6 @@
 # Nutrify
-Web application for your daily calories tracking
+Web application for your daily calories tracking.
+Link: https://nutrify-web-app.herokuapp.com/
 
 ## Technologies used
 It is built using nodejs, expressjs, mongodb, pugjs.
